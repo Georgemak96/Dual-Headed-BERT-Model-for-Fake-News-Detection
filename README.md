@@ -10,26 +10,39 @@ This research introduces a **dual-headed BERT-based classifier** trained on a di
 
 By combining these tasks, the model offers a more nuanced understanding of modern misinformation, especially in contexts where AI-generated fake news is designed to mimic human writing styles.
 
+## Model Experiments
+
+### Dual-Head BERT (DistilBERT backbone)
+- Multi-task classification: Fake-vs-Real and Human-vs-LLM
+- Achieved **85% accuracy** on fake news detection and **96% accuracy** on LLM detection
+- Strong generalization across unseen datasets and LLMs
+
+### GPT-2 Fine-Tuning (Binary Fake News Classification)
+In a parallel experiment, I fine-tuned **GPT-2** for binary fake news detection. Despite GPT-2 being designed for next-word prediction, it achieved surprisingly strong results:
+- **87% accuracy** on fake news classification
+- Performance close to BERT-based models
+
+#### Why GPT-2 Worked Well
+- Used the **last token of the final hidden state** as a proxy for BERT’s `[CLS]` token, leveraging masked attention to capture full-sequence context
+- Applied **mean pooling** across all token embeddings
+- Concatenated both representations and passed through a linear layer with sigmoid activation
+
+This approach allowed GPT-2 to effectively summarize the input sequence and perform classification, even without native support for sequence-level tasks.
+
 ## Dataset Composition
 
 - **Human-written sources**: Six datasets including real and fake news from verified outlets
 - **LLM-generated sources**: Articles produced by GPT-3.5, Llama2, and Mistral across multiple prompts and strategies
 - **MegaFake**: A challenging test set with highly realistic AI-generated fake news
 
-## Model Architecture & Training
+## Results Summary
 
-- Based on **BERT-base**, modified with two classification heads
-- Trained using a **multi-task learning** approach
-- Evaluated on both in-domain and out-of-domain datasets to test generalization
-
-## Results
-
-| Task               | Accuracy | F1 Score |
-|--------------------|----------|----------|
-| Fake vs Real       | 85%      | 86%      |
-| Human vs LLM       | 96%      | 85%      |
-
-The model shows strong generalization across unseen data and outperforms traditional detectors, especially when faced with sophisticated AI-generated misinformation.
+| Model              | Task               | Accuracy | F1 Score |
+|-------------------|--------------------|----------|----------|
+| Dual-Head BERT     | Fake vs Real       | 85%      | 86%      |
+| Dual-Head BERT     | Human vs LLM       | 96%      | 85%      |
+| GPT-2 Fine-Tuned   | Fake vs Real       | 87%      | ~87%     |
+| BERT-Base (baseline)| Fake vs Real      | 89%      | ~90%     |
 
 ## Why It Matters
 
@@ -37,5 +50,4 @@ The model shows strong generalization across unseen data and outperforms traditi
 - **Future-proof**: Designed to adapt to evolving LLM capabilities
 - **Real-world relevance**: Addresses urgent concerns in journalism, social media, and public discourse
 
-
-Feel free to reach out or open an issue if you have questions or ideas for improvement!
+Feel free to open an issue or reach out if you have questions, feedback, or ideas for improvement!
