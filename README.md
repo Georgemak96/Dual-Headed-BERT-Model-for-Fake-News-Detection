@@ -18,7 +18,7 @@ By combining these tasks, the model offers a more nuanced understanding of moder
 
 ## Model Architecture & Training
 
-- Based on **BERT-baseT**, modified with two classification heads
+- Based on **BERT-base**, modified with two classification heads
 - Trained using a **multi-task learning** approach
 - Evaluated on both in-domain and out-of-domain datasets to test generalization
 
