@@ -22,7 +22,7 @@ By combining these tasks, the model offers a more nuanced understanding of moder
 - Trained using a **multi-task learning** approach
 - Evaluated on both in-domain and out-of-domain datasets to test generalization
 
-## 📈 Results
+## Results
 
 | Task               | Accuracy | F1 Score |
 |--------------------|----------|----------|
