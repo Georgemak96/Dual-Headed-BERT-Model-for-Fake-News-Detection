@@ -42,7 +42,6 @@ This approach allowed GPT-2 to effectively summarize the input sequence and perf
 | Dual-Head BERT     | Fake vs Real       | 85%      | 86%      |
 | Dual-Head BERT     | Human vs LLM       | 96%      | 85%      |
 | GPT-2 Fine-Tuned   | Fake vs Real       | 87%      | ~87%     |
-| BERT-Base (baseline)| Fake vs Real      | 89%      | ~90%     |
 
 ## Why It Matters
 
